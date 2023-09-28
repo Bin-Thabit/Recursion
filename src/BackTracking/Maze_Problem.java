@@ -13,6 +13,8 @@ public class Maze_Problem {
         System.out.println();
         // Return ArrayList that contains all possible paths
         System.out.println(printPath2("", 1, 1));
+        // Return ArrayList that contains all possible paths including diagonal
+        System.out.println(printPathDiagonal("", 1, 1));
     }
 
 	static int countPath(int row , int col) {
@@ -51,6 +53,24 @@ public class Maze_Problem {
         
         if(col < 3)
         	ans.addAll(printPath2(p + "R" , row , col + 1));
+        return ans;
+    }
+    
+    // Including Diagonal Paths
+    static ArrayList<String> printPathDiagonal(String p , int row , int col){
+        if(row == 3 && col == 3) {
+        	ArrayList<String> list = new ArrayList();
+        	list.add(p);
+            return list;
+        }
+        ArrayList<String> ans = new ArrayList();
+        if(row < 3)
+        	ans.addAll(printPathDiagonal(p + "V" , row + 1 , col));
+        
+        if(col < 3)
+        	ans.addAll(printPathDiagonal(p + "H" , row , col + 1));
+        if(row < 3 && col < 3)
+        	ans.addAll(printPathDiagonal(p + "V" , row + 1 , col + 1));
         return ans;
     }
     
